@@ -7,9 +7,10 @@
       }
     ],
     "routes": [
+      { "handle": "filesystem" },
       {
         "src": "/(.*)",
-        "dest": "/interactive_dashboard.py"
+        "dest": "interactive_dashboard.py"
       }
     ]
   }
