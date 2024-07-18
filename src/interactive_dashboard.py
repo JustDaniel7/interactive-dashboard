@@ -1,3 +1,5 @@
+# app.py
+
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
@@ -24,13 +26,13 @@ def load_data():
     df['SALES'] = df['QUANTITYORDERED'] * df['PRICEEACH']
     return df
 
-# Create the Dash app
-external_stylesheets = ['https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
 # Load the data
 df = load_data()
 top_products = df.groupby('PRODUCTLINE')['SALES'].sum().nlargest(5).index.tolist()
+
+# Create the Dash app
+external_stylesheets = ['https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, url_base_pathname='/dash-app/')
 
 # Define the app layout
 app.layout = html.Div(
