@@ -1,1 +1,1 @@
-web: gunicorn interactive_dashboard:server
+web: gunicorn interactive_dashboard:server --log-level=info

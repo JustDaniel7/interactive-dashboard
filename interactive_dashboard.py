@@ -10,7 +10,7 @@ def load_data():
     encodings = ['utf-8', 'ISO-8859-1', 'windows-1252']
     for encoding in encodings:
         try:
-            df = pd.read_csv('/Users/justdaniel/DataProjects/interactive-dashboard/sales_data.csv', encoding=encoding)
+            df = pd.read_csv('/sales_data.csv', encoding=encoding)
             print(f"Successfully read the file with {encoding} encoding.")
             break
         except UnicodeDecodeError:
