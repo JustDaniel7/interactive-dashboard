@@ -28,12 +28,12 @@ def load_data():
 df = load_data()
 top_products = df.groupby('PRODUCTLINE')['SALES'].sum().nlargest(5).index.tolist()
 
-# Create the Dash app with url_base_pathname
+# Create the Dash app
 external_stylesheets = ['https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets, url_base_pathname='/dash-app/')
+server = dash.Dash(__name__, external_stylesheets=external_stylesheets, url_base_pathname='/dash-app/')
 
 # Define the app layout
-app.layout = html.Div(
+server.layout = html.Div(
     className='bg-gray-100 min-h-screen p-4',
     children=[
         html.Nav(
@@ -101,7 +101,7 @@ app.layout = html.Div(
 )
 
 # Callbacks
-@app.callback(
+@server.callback(
     Output('top-products-chart', 'figure'),
     Input('product-dropdown', 'options')
 )
@@ -111,7 +111,7 @@ def update_top_products_chart(options):
     fig.update_layout(showlegend=False, margin=dict(l=0, r=0, t=30, b=0))
     return fig
 
-@app.callback(
+@server.callback(
     Output('monthly-sales-chart', 'figure'),
     Input('product-dropdown', 'value')
 )
@@ -123,7 +123,7 @@ def update_monthly_sales_chart(selected_product):
     fig.update_layout(showlegend=False, margin=dict(l=0, r=0, t=30, b=0))
     return fig
 
-@app.callback(
+@server.callback(
     Output('price-vs-sales-chart', 'figure'),
     Input('product-dropdown', 'value')
 )
@@ -146,7 +146,7 @@ def update_price_vs_sales_chart(selected_product):
     )
     return fig
 
-@app.callback(
+@server.callback(
     Output('product-sales-distribution-chart', 'figure'),
     Input('product-dropdown', 'value')
 )
@@ -156,4 +156,4 @@ def update_product_sales_distribution(selected_product):
     return fig
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    server.run_server(debug=True)
