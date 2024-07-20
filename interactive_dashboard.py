@@ -158,4 +158,4 @@ def update_product_sales_distribution(selected_product):
     return fig
 
 if __name__ == '__main__':
-    app.run_app(debug=True)
+    app.run_server(debug=True)
